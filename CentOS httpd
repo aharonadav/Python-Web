@@ -1,0 +1,17 @@
+
+Httpd CentOS configuration:
+
+Enable modules:
+LoadModule cgi_module modules/mod_cgi.so
+LoadModule cgid_module modules/mod_cgid.so
+
+ScriptAlias /cgi-bin/ "/var/www/cgi-bin/"
+
+Add configuration:
+<Directory "/var/www/cgi-bin">
+    AllowOverride None
+    Options +ExecCGI
+    AddHandler cgi-script .py
+    Order allow,deny
+    Allow from all
+</Directory>
