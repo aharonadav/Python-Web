@@ -1,0 +1,127 @@
+#!/usr/bin/python
+import os
+import cgi,cgitb,os,io
+
+print "Content-type:text/html\r\n\r\n"
+print
+print """
+
+<html>
+
+<head>
+  <title>Aharon-Python Script</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <scripit src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://code.jquery.com/jquery-2.0.3.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="jumbotron">
+    <center><h2>Aharon Python Script</h2></center>
+    <p>Instance replacement</p>
+  </div>
+  <hr>
+  
+<div class="form-group">
+  <label for="cmd">Command:</lable>
+  <input type="text" class="form-control" id="cmd">
+</div>
+
+<div class="row">
+   <div class="col-md-4">
+	<div class="form-group">
+  	<label for="serverid">Server ID:</lable>
+  	<input type="text" class="form-control" id="serverid">
+	</div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+	<div class="form-group">
+        <label for="partnerid">Partner ID:</lable>
+        <input type="text" class="form-control" id="partnerid">
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+	<div class="col-md-4">
+	   <div class="form-group">
+	   <label for="adminsecret">Admin Secret:</lable>
+	   <input type="text" class="form-control" id="adminsecret">
+	   </div>
+	</div>
+</div>	
+<hr>
+
+   <button type="button" class="btn btn-primary btn-lg" id="button">Run</button>
+	
+
+   
+   <button type="button" class="btn btn-primary btn-lg" id="MyButton">Apply Changes</button>
+   
+</div>
+<hr>
+<div class="row">
+	<div class="col-md-12">
+		<div class="jumbotron" id="result">
+		</div>
+	</div>
+  </div>
+
+</body>
+
+
+<script>
+
+$("#MyButton").click( function(){
+  $.ajax({
+	url: "run.php",
+	type: "POST",
+	data:({"partnerid":$("#partnerid").val()}),
+  });
+});
+
+function myfunction() {
+	var x = document.getElementById("mytext").value;
+	document.getElementById("demo").innerHTML = x;
+	}
+</script>	
+
+<script>
+
+ $("#button").click(function(){
+        $.ajax({
+                url:"cmd.py",
+                type:"POST",
+                data:({
+			"cmd1": $("#cmd").val(),
+			"add1": $("#serverid").val(),
+			"add2": $("#partnerid").val(),
+			"add3": $("#adminsecret").val()
+		}),
+                success: function(data){
+                        $("#result").html(data);
+                },
+                error: function(){
+                        $("#result").html("Error !");
+                }
+        });
+     });
+
+</script>
+</html>
+"""
+
